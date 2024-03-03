@@ -1,13 +1,12 @@
 import { CharactersCollection } from './CharactersCollection';
 import { LinkedList } from './LInkedList';
 import { NumbersCollection } from './NumbersCollection';
-import { Sorter } from './Sorter';
 
 const numbersToSort = new NumbersCollection([10, 1, -5, 0, 100, -100]);
 numbersToSort.sort();
 console.log(numbersToSort.data);
 
-const stringToSort = new CharactersCollection('chjdxafksn');
+const stringToSort = new CharactersCollection('chjdxZafksn');
 stringToSort.sort();
 console.log(stringToSort.data);
 

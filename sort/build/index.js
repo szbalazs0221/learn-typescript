@@ -6,7 +6,7 @@ const NumbersCollection_1 = require("./NumbersCollection");
 const numbersToSort = new NumbersCollection_1.NumbersCollection([10, 1, -5, 0, 100, -100]);
 numbersToSort.sort();
 console.log(numbersToSort.data);
-const stringToSort = new CharactersCollection_1.CharactersCollection('chjdxafksn');
+const stringToSort = new CharactersCollection_1.CharactersCollection('chjdxZafksn');
 stringToSort.sort();
 console.log(stringToSort.data);
 const linkedList = new LInkedList_1.LinkedList();
