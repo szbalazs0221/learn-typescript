@@ -7,6 +7,12 @@ const matches = fs
     return row.split(',');
   });
 
+enum MatchResult {
+  HomeWin = 'H',
+  AwayWin = 'A',
+  Draw = 'D',
+}
+
 let manUnitedWins = 0;
 
 for (let match of matches) {
@@ -14,8 +20,8 @@ for (let match of matches) {
   const awayTeam = match[2];
   const winner = match[5];
   if (
-    (homeTeam === 'Man United' && winner === 'H') ||
-    (awayTeam === 'Man United' && winner === 'A')
+    (homeTeam === 'Man United' && winner === MatchResult.HomeWin) ||
+    (awayTeam === 'Man United' && winner === MatchResult.AwayWin)
   ) {
     manUnitedWins++;
   }
