@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
+import { ApiSync } from './ApiSync';
 import { Attributes } from './Attributes';
-import { Callback, Eventing } from './Eventing';
-import { Sync } from './Sync';
+import { Eventing } from './Eventing';
+import { Model } from './Model';
 
 export interface UserProps {
   id?: number;
@@ -11,49 +11,12 @@ export interface UserProps {
 
 const rootUrl = 'http://localhost:3000/users';
 
-export class User {
-  events: Eventing = new Eventing();
-  sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
-  attributes: Attributes<UserProps>;
-
-  constructor(private userInfo: UserProps) {
-    this.attributes = new Attributes<UserProps>(this.userInfo);
-  }
-
-  get get() {
-    return this.attributes.get;
-  }
-
-  get on() {
-    return this.events.on;
-  }
-
-  get trigger() {
-    return this.events.trigger;
-  }
-
-  set(update: UserProps): void {
-    this.attributes.set(update);
-    this.events.trigger('change');
-  }
-
-  fetch(): void {
-    const id = this.get('id');
-    if (!id) {
-      throw new Error('Cannot fetch without and id');
-    }
-
-    this.sync.fetch(id).then((response: AxiosResponse): void => {
-      this.set(response.data);
-    });
-  }
-
-  save(): void {
-    this.sync
-      .save(this.attributes.getAll())
-      .then((_: AxiosResponse): void => {
-        this.trigger('save');
-      })
-      .catch(() => this.trigger('error'));
+export class User extends Model<UserProps> {
+  static buildUser(attrs: UserProps): User {
+    return new Model<UserProps>(
+      new Attributes<UserProps>(attrs),
+      new Eventing(),
+      new ApiSync<UserProps>(rootUrl)
+    );
   }
 }
