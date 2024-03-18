@@ -7,5 +7,10 @@ import { UserForm } from './views/UserForm';
 // });
 // collection.fetch();
 const user = User.buildUser({ age: 30, name: 'Balazs' });
-const form = new UserForm(document.getElementById('root') as Element, user);
-form.render();
+const root = document.getElementById('root');
+if (root) {
+  const form = new UserForm(root, user);
+  form.render();
+} else {
+  throw new Error('Root element not found');
+}
