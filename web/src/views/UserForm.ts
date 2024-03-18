@@ -42,17 +42,6 @@ export class UserForm extends View<User, UserProps> {
     `;
   }
 
-  bindEvents(fragment: DocumentFragment): void {
-    const eventsMap = this.eventsMap();
-    for (let eventKey in eventsMap) {
-      const [eventName, elementSelector] = eventKey.split(':');
-      const htmlElements = fragment.querySelectorAll(elementSelector);
-      htmlElements.forEach((htmlElement) => {
-        htmlElement.addEventListener(eventName, eventsMap[eventKey]);
-      });
-    }
-  }
-
   render(): void {
     this.parent.innerHTML = '';
     const templateElement = document.createElement('template');
