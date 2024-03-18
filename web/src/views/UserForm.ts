@@ -1,17 +1,8 @@
 import { Callback } from '../models/Eventing';
-import { User } from '../models/User';
+import { User, UserProps } from '../models/User';
+import { View } from './View';
 
-export class UserForm {
-  constructor(private parent: Element, private userModel: User) {
-    this.bindModel();
-  }
-
-  bindModel(): void {
-    this.userModel.on('change', () => {
-      this.render();
-    });
-  }
-
+export class UserForm extends View<User, UserProps> {
   eventsMap(): { [key: string]: Callback } {
     return {
       'click:.set-age': this.onSetAgeClick,
@@ -20,14 +11,14 @@ export class UserForm {
   }
 
   onSetAgeClick = (): void => {
-    this.userModel.setRandomAge();
+    this.model.setRandomAge();
   };
 
   onSetNameClick = (): void => {
     const input = this.parent.querySelector('input');
     if (input) {
       const name = input.value;
-      this.userModel.set({ name });
+      this.model.set({ name });
     }
   };
 
@@ -35,12 +26,10 @@ export class UserForm {
     return `
       <div>
         <h1>User Form</h1>
-        <div>Name: ${this.userModel.get('name')}</div>
-        <div>Age: ${this.userModel.get('age')}</div>
+        <div>Name: ${this.model.get('name')}</div>
+        <div>Age: ${this.model.get('age')}</div>
         <div>
-          <input class='input-name' type="text" value=${this.userModel.get(
-            'name'
-          )}>
+          <input class='input-name' type="text" value=${this.model.get('name')}>
           <button class='set-name'>Update Name</button>
         </div>
         <div>
