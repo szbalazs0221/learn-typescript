@@ -2,12 +2,22 @@
   "users": [
     {
       "id": 1,
-      "name": "newer name",
+      "name": "Balazs",
       "age": 50
     },
     {
       "id": 2,
-      "name": "B",
+      "name": "Emő",
+      "age": 23
+    },
+    {
+      "id": 3,
+      "name": "Barni",
+      "age": 23
+    },
+    {
+      "id": 4,
+      "name": "Attila",
       "age": 23
     }
   ]
